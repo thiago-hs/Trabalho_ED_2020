@@ -15,8 +15,11 @@ public class Main {
         System.out.println("--------------------------------------------");
         
         while (true) {
-
+        	
+        	System.out.flush();  
+        	
         	Main.printarMenu();
+        	
             String inputText = in.nextLine().trim();
             int inputEntry = 0;
             
@@ -29,7 +32,7 @@ public class Main {
             
             switch(inputEntry) {
             	case 1:
-            		CRUD.create("dados.csv");
+            		CRUD.create("DadosReciclagem_v02.csv");
             		break;
             	case 2:
             		CRUD.read("entrada.txt");
@@ -134,34 +137,43 @@ public class Main {
 		
         Registro  r = new Registro();
         
-        System.out.print("Digite o ID: ");
-        String inputText = in.nextLine().trim();
-        r.setId(Integer.parseInt(inputText));
-        
-        System.out.print("Digite o Estado: ");
-        inputText = in.nextLine().trim();
-        r.setUf(inputText);
-		
-        System.out.print("Digite a Producao de Lixo a/a (em milhoes ton): ");
-        inputText = in.nextLine().trim();
-        r.setProdLixo(Float.parseFloat(inputText));
-		
-        System.out.print("Digite a qtde. de Postos de Coleta: ");
-        inputText = in.nextLine().trim();
-        r.setPostosColeta(Integer.parseInt(inputText));
-        
-        System.out.print("Digite a porcetagem de Reciclagem: ");
-        inputText = in.nextLine().trim();
-        r.setPorcentagemReciclagem(Float.parseFloat(inputText));
-        
-        System.out.print("Digite a economia gerada em R$ (milhoes): ");
-        inputText = in.nextLine().trim();
-        r.setEconomiaEmValores(Float.parseFloat(inputText));
-        
-        System.out.print("Digite a qtde. de Empregos Gerados: ");
-        inputText = in.nextLine().trim();
-        r.setQtdeEmpregosGerados(Integer.parseInt(inputText));
-        
+        try {
+        	
+            System.out.print("Digite o ID: ");
+            String inputText = in.nextLine().trim();
+            r.setId(Integer.parseInt(inputText));
+            
+            System.out.print("Digite o Estado: ");
+            inputText = in.nextLine().trim();
+            r.setUf(inputText);
+    		
+            System.out.print("Digite a Producao de Lixo a/a (em milhoes ton): ");
+            inputText = in.nextLine().trim();
+            r.setProdLixo(Float.parseFloat(inputText));
+    		
+            System.out.print("Digite a qtde. de Postos de Coleta: ");
+            inputText = in.nextLine().trim();
+            r.setPostosColeta(Integer.parseInt(inputText));
+            
+            System.out.print("Digite a porcetagem de Reciclagem: ");
+            inputText = in.nextLine().trim();
+            r.setPorcentagemReciclagem(Float.parseFloat(inputText));
+            
+            System.out.print("Digite a economia gerada em R$ (milhoes): ");
+            inputText = in.nextLine().trim();
+            r.setEconomiaEmValores(Float.parseFloat(inputText));
+            
+            System.out.print("Digite a qtde. de Empregos Gerados: ");
+            inputText = in.nextLine().trim();
+            r.setQtdeEmpregosGerados(Integer.parseInt(inputText));
+            
+        }catch( Exception e) {
+        	
+        	System.out.println("Erro ao manipular registro :(");
+        	return null;
+        	
+        }
+ 
 		return r;
 	}
 }

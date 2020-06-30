@@ -15,6 +15,8 @@ import java.util.List;
 
 public class CRUD {
 
+	
+	
 	/**
 	 * Cria um arquivo de entrada chamado <b>entrada.txt</b> a partir de outro arquivo.
 	 * @param path : Caminho do arquivo.
@@ -41,8 +43,10 @@ public class CRUD {
 			leitor.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+			return false;
 		} catch (IOException e) {
 			e.printStackTrace();
+			return false;
 		}
 		
 		// criacao do arquivo de entrada
@@ -56,9 +60,15 @@ public class CRUD {
 			escritor.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+			return false;
 		}
 		
-		return false;
+		System.out.println();
+		System.out.println("--------------------------------------------");
+		System.out.println("Arquivo entrada.txt criado com sucesso !");
+        System.out.println("--------------------------------------------");
+        
+		return true;
 	}
 	
 	// -------------------------------------------------------------------------------------------
@@ -87,8 +97,16 @@ public class CRUD {
 			
 			leitor.close();
 		} catch (FileNotFoundException e) {
+			System.out.println();
+			System.out.println("--------------------------------------------");
+			System.out.println("Arquivo entrada.txt não encontrado :( , Crie-o ande de executar essa operação :) ");
+	        System.out.println("--------------------------------------------");
 			return false;
 		} catch (IOException e) {
+			System.out.println();
+			System.out.println("--------------------------------------------");
+			System.out.println("Arquivo entrada.txt não encontrado :( , Crie-o ande de executar essa operação :) ");
+	        System.out.println("--------------------------------------------");
 			return false;
 		}
 		
@@ -98,6 +116,7 @@ public class CRUD {
 		int[] iArray = new int[temp.length];
 		
 		for (int i = 0; i < dados.size(); i++) {
+			
 			temp = dados.get(i);
 			
 			for (int j = 0; j < temp.length; j++) {
@@ -188,6 +207,10 @@ public class CRUD {
 			
 			leitor.close();
 		} catch (FileNotFoundException e) {
+			System.out.println();
+			System.out.println("--------------------------------------------");
+			System.out.println("Arquivo entrada.txt não encontrado :( , Crie-o ande de executar essa operação :) ");
+	        System.out.println("--------------------------------------------");
 			return false;
 		} catch (IOException e) {
 			return false;
@@ -220,116 +243,133 @@ public class CRUD {
 	// -------------------------------------------------------------------------------------------
 	
 	public static boolean insert(Registro registro, String path) {
-		try {
-			// leitura dos registros para inclusao no 'ArrayList'
-			BufferedReader leitor = new BufferedReader(new FileReader(path));
-			List<String> dados = new ArrayList<String>();
-			boolean flag = true;
-			int linhaAtual = 0;
-			
-			while (flag) {
-				String linha = leitor.readLine();
-				if ((linha != null) ) {
-					if (linhaAtual == 1) {
-						StringBuffer sb = new StringBuffer();
-						
-						sb.append(registro.getId() + ";");
-						sb.append(registro.getUf() + ";");
-						sb.append(registro.getProdLixo() + ";");
-						sb.append(registro.getPostosColeta() + ";");
-						sb.append(registro.getPorcentagemReciclagem() + ";");
-						sb.append(registro.getEconomiaEmValores() + ";");
-						sb.append(registro.getQtdeEmpregosGerados());
-						
-						dados.add(sb.toString());
-						dados.add(linha);
+		if(registro != null) {
+			try {
+				// leitura dos registros para inclusao no 'ArrayList'
+				BufferedReader leitor = new BufferedReader(new FileReader(path));
+				List<String> dados = new ArrayList<String>();
+				boolean flag = true;
+				int linhaAtual = 0;
+				
+				while (flag) {
+					String linha = leitor.readLine();
+					if ((linha != null) ) {
+						if (linhaAtual == 1) {
+							StringBuffer sb = new StringBuffer();
+							
+							sb.append(registro.getId() + ";");
+							sb.append(registro.getUf() + ";");
+							sb.append(registro.getProdLixo() + ";");
+							sb.append(registro.getPostosColeta() + ";");
+							sb.append(registro.getPorcentagemReciclagem() + ";");
+							sb.append(registro.getEconomiaEmValores() + ";");
+							sb.append(registro.getQtdeEmpregosGerados());
+							
+							dados.add(sb.toString());
+							dados.add(linha);
+						} else {
+							dados.add(linha);
+						}
 					} else {
-						dados.add(linha);
+						flag = false;
 					}
-				} else {
-					flag = false;
+					linhaAtual++;
 				}
-				linhaAtual++;
+				
+				leitor.close();
+				
+				// sobrescrita do arquivo
+				BufferedWriter escritor = new BufferedWriter(new FileWriter(path));
+				
+				for (int i = 0; i < dados.size(); i++) {
+					escritor.append(dados.get(i) + "\r\n");
+				}
+				
+				escritor.flush();
+				escritor.close();
+			} catch (FileNotFoundException e) {
+				System.out.println();
+				System.out.println("--------------------------------------------");
+				System.out.println("Arquivo entrada.txt não encontrado :( , Crie-o ande de executar essa operação :) ");
+		        System.out.println("--------------------------------------------");
+				return false;
+			} catch (IOException e) {
+				return false;
 			}
 			
-			leitor.close();
-			
-			// sobrescrita do arquivo
-			BufferedWriter escritor = new BufferedWriter(new FileWriter(path));
-			
-			for (int i = 0; i < dados.size(); i++) {
-				escritor.append(dados.get(i) + "\r\n");
-			}
-			
-			escritor.flush();
-			escritor.close();
-		} catch (FileNotFoundException e) {
-			return false;
-		} catch (IOException e) {
-			return false;
+			return true;
 		}
-		
-		return true;
+		return false;
 	}
 	
 	// -------------------------------------------------------------------------------------------
 	
 	public static int update(Registro r, String path) {
-		int affectedRecords = 0;
 		
-		try {
-			// leitura dos registros para criacao da 'LinkedList'
-			BufferedReader leitor = new BufferedReader(new FileReader(path));
-			List<String> dados = new LinkedList<String>();
-			boolean flag = true;
+		if(r != null) {
+			int affectedRecords = 0;
 			
-			while (flag) {
-				String linha = leitor.readLine();
-				if ((linha != null) ) {
-					dados.add(linha);
-				} else {
-					flag = false;
-				}
-			}
-			
-			leitor.close();
-			
-			// atualizacao
-			// variavel 'i' comeca com 1 para pular o cabecalho
-			for (int i = 1; i < dados.size(); i++) {
-				String[] temp = dados.get(i).split(";");
-				int idLista = Integer.parseInt(temp[0]);
+			try {
+				// leitura dos registros para criacao da 'LinkedList'
+				BufferedReader leitor = new BufferedReader(new FileReader(path));
+				List<String> dados = new LinkedList<String>();
+				boolean flag = true;
 				
-				if (idLista == r.getId()) {
-					String s = String.valueOf(r.getId()) + ";"
-						+ String.valueOf(r.getUf()) + ";"
-						+ String.valueOf(r.getProdLixo()) + ";"
-						+ String.valueOf(r.getPostosColeta()) + ";"
-						+ String.valueOf(r.getPorcentagemReciclagem()) + ";"
-						+ String.valueOf(r.getEconomiaEmValores()) + ";"
-						+ String.valueOf(r.getQtdeEmpregosGerados());
-					dados.set(i, s);
-					affectedRecords++;
+				while (flag) {
+					String linha = leitor.readLine();
+					if ((linha != null) ) {
+						dados.add(linha);
+					} else {
+						flag = false;
+					}
 				}
 				
+				leitor.close();
+				
+				// atualizacao
+				// variavel 'i' comeca com 1 para pular o cabecalho
+				for (int i = 1; i < dados.size(); i++) {
+					String[] temp = dados.get(i).split(";");
+					int idLista = Integer.parseInt(temp[0]);
+					
+					if (idLista == r.getId()) {
+						String s = String.valueOf(r.getId()) + ";"
+							+ String.valueOf(r.getUf()) + ";"
+							+ String.valueOf(r.getProdLixo()) + ";"
+							+ String.valueOf(r.getPostosColeta()) + ";"
+							+ String.valueOf(r.getPorcentagemReciclagem()) + ";"
+							+ String.valueOf(r.getEconomiaEmValores()) + ";"
+							+ String.valueOf(r.getQtdeEmpregosGerados());
+						dados.set(i, s);
+						affectedRecords++;
+					}
+					
+				}
+				
+				// sobrescrita do arquivo
+				BufferedWriter escritor = new BufferedWriter(new FileWriter(path));
+				
+				for (int i = 0; i < dados.size(); i++) {
+					escritor.append(dados.get(i) + "\r\n");
+				}
+				
+				escritor.flush();
+				escritor.close();
+			} catch (FileNotFoundException e) {
+				System.out.println();
+				System.out.println("--------------------------------------------");
+				System.out.println("Arquivo entrada.txt não encontrado :( , Crie-o ande de executar essa operação :) ");
+		        System.out.println("--------------------------------------------");
+				return 0;
+			} catch (IOException e) {
+				return 0;
 			}
 			
-			// sobrescrita do arquivo
-			BufferedWriter escritor = new BufferedWriter(new FileWriter(path));
-			
-			for (int i = 0; i < dados.size(); i++) {
-				escritor.append(dados.get(i) + "\r\n");
-			}
-			
-			escritor.flush();
-			escritor.close();
-		} catch (FileNotFoundException e) {
-			return 0;
-		} catch (IOException e) {
-			return 0;
+			return affectedRecords;
 		}
 		
-		return affectedRecords;
+		return 0;
+
 	}
 	
 }
