@@ -99,13 +99,13 @@ public class CRUD {
 		} catch (FileNotFoundException e) {
 			System.out.println();
 			System.out.println("--------------------------------------------");
-			System.out.println("Arquivo entrada.txt n„o encontrado :( , Crie-o ande de executar essa operaÁ„o :) ");
+			System.out.println("Arquivo entrada.txt n√£o encontrado :( , Crie-o ande de executar essa opera√ß√£o :) ");
 	        System.out.println("--------------------------------------------");
 			return false;
 		} catch (IOException e) {
 			System.out.println();
 			System.out.println("--------------------------------------------");
-			System.out.println("Arquivo entrada.txt n„o encontrado :( , Crie-o ande de executar essa operaÁ„o :) ");
+			System.out.println("Arquivo entrada.txt n√£o encontrado :( , Crie-o ande de executar essa opera√ß√£o :) ");
 	        System.out.println("--------------------------------------------");
 			return false;
 		}
@@ -195,21 +195,28 @@ public class CRUD {
 		try {
 			BufferedReader leitor = new BufferedReader(new FileReader(path));
 			boolean flag = true;
+			int linhaAtual = 0;
 			
 			while (flag) {
 				String linha = leitor.readLine();
-				if (linha != null) {
-					dados.add(linha);
+				
+				if ((linha != null)) {
+					if (linhaAtual == 1) {
+						// pula esta linha e n√£o adiciona
+					} else {
+						dados.add(linha);
+					}
 				} else {
 					flag = false;
 				}
+				linhaAtual++;
 			}
 			
 			leitor.close();
 		} catch (FileNotFoundException e) {
 			System.out.println();
 			System.out.println("--------------------------------------------");
-			System.out.println("Arquivo entrada.txt n„o encontrado :( , Crie-o ande de executar essa operaÁ„o :) ");
+			System.out.println("Arquivo entrada.txt n√£o encontrado :( , Crie-o ande de executar essa opera√ß√£o :) ");
 	        System.out.println("--------------------------------------------");
 			return false;
 		} catch (IOException e) {
@@ -220,7 +227,7 @@ public class CRUD {
 		try {
 			BufferedWriter escritor = new BufferedWriter(new FileWriter("entrada2.txt"));
 			
-			for (int i = 0; i < dados.size() - 1; i++) {
+			for (int i = 0; i < dados.size(); i++) {
 				escritor.append(dados.get(i) + "\r\n");
 			}
 			
@@ -249,33 +256,29 @@ public class CRUD {
 				BufferedReader leitor = new BufferedReader(new FileReader(path));
 				List<String> dados = new ArrayList<String>();
 				boolean flag = true;
-				int linhaAtual = 0;
-				
+
 				while (flag) {
 					String linha = leitor.readLine();
-					if ((linha != null) ) {
-						if (linhaAtual == 1) {
-							StringBuffer sb = new StringBuffer();
-							
-							sb.append(registro.getId() + ";");
-							sb.append(registro.getUf() + ";");
-							sb.append(registro.getProdLixo() + ";");
-							sb.append(registro.getPostosColeta() + ";");
-							sb.append(registro.getPorcentagemReciclagem() + ";");
-							sb.append(registro.getEconomiaEmValores() + ";");
-							sb.append(registro.getQtdeEmpregosGerados());
-							
-							dados.add(sb.toString());
-							dados.add(linha);
-						} else {
-							dados.add(linha);
-						}
+
+					if (linha != null) {
+						dados.add(linha);
 					} else {
+						StringBuffer sb = new StringBuffer();
+
+						sb.append(registro.getId() + ";");
+						sb.append(registro.getUf() + ";");
+						sb.append(registro.getProdLixo() + ";");
+						sb.append(registro.getPostosColeta() + ";");
+						sb.append(registro.getPorcentagemReciclagem() + ";");
+						sb.append(registro.getEconomiaEmValores() + ";");
+						sb.append(registro.getQtdeEmpregosGerados());
+
+						dados.add(sb.toString());
 						flag = false;
 					}
-					linhaAtual++;
+
 				}
-				
+
 				leitor.close();
 				
 				// sobrescrita do arquivo
@@ -290,7 +293,7 @@ public class CRUD {
 			} catch (FileNotFoundException e) {
 				System.out.println();
 				System.out.println("--------------------------------------------");
-				System.out.println("Arquivo entrada.txt n„o encontrado :( , Crie-o ande de executar essa operaÁ„o :) ");
+				System.out.println("Arquivo entrada.txt n√£o encontrado :( , Crie-o ande de executar essa opera√ß√£o :) ");
 		        System.out.println("--------------------------------------------");
 				return false;
 			} catch (IOException e) {
@@ -358,7 +361,7 @@ public class CRUD {
 			} catch (FileNotFoundException e) {
 				System.out.println();
 				System.out.println("--------------------------------------------");
-				System.out.println("Arquivo entrada.txt n„o encontrado :( , Crie-o ande de executar essa operaÁ„o :) ");
+				System.out.println("Arquivo entrada.txt n√£o encontrado :( , Crie-o ande de executar essa opera√ß√£o :) ");
 		        System.out.println("--------------------------------------------");
 				return 0;
 			} catch (IOException e) {
