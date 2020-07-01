@@ -68,6 +68,7 @@ public class Main {
             		break;
             	case 6:
             	case 7:
+            		CRUD.sortByQuickSort("entrada.txt");
             	case 8:
             	case 9:
             	case 10:

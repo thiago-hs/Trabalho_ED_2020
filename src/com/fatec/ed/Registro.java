@@ -77,6 +77,14 @@ public class Registro {
 	public void setQtdeEmpregosGerados(int qtdeEmpregosGerados) {
 		this.qtdeEmpregosGerados = qtdeEmpregosGerados;
 	}
+
+	@Override
+	public String toString() {
+		return "Registro [id=" + id + ", uf=" + uf + ", prodLixo=" + prodLixo + ", postosColeta=" + postosColeta
+				+ ", porcentagemReciclagem=" + porcentagemReciclagem + ", economiaEmValores=" + economiaEmValores
+				+ ", qtdeEmpregosGerados=" + qtdeEmpregosGerados + "]";
+	}
+	
 	
 	
 }

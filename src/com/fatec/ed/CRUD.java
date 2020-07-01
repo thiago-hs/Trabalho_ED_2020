@@ -252,6 +252,7 @@ public class CRUD {
 	public static boolean insert(Registro registro, String path) {
 		if(registro != null) {
 			try {
+				
 				// leitura dos registros para inclusao no 'ArrayList'
 				BufferedReader leitor = new BufferedReader(new FileReader(path));
 				List<String> dados = new ArrayList<String>();
@@ -373,6 +374,93 @@ public class CRUD {
 		
 		return 0;
 
+	}
+	
+	// -------------------------------------------------------------------------------------------
+	
+	public static List<Registro> fileToList(String path) {
+		
+		List<Registro> dados = new ArrayList<>();
+		
+		// Leitura do arquivo
+		try {
+			
+			BufferedReader leitor = new BufferedReader(new FileReader(path));
+			
+			String linha = "";
+			
+			boolean flag = true;
+			
+			boolean firstLine = true;
+			
+			while (flag) {
+				
+				linha = leitor.readLine();
+				
+				if (linha != null) {
+					
+					if(!firstLine){
+						
+						String[] temp = linha.split(";");
+						
+						Registro registro = new Registro();
+						
+						registro.setId(Integer.parseInt(temp[0]));
+						registro.setUf(temp[1]);
+						registro.setProdLixo(Float.parseFloat(temp[2]));
+						registro.setPostosColeta(Integer.parseInt(temp[3]));
+						registro.setPorcentagemReciclagem(Float.parseFloat(temp[4]));
+						registro.setEconomiaEmValores(Float.parseFloat(temp[5]));
+						registro.setQtdeEmpregosGerados(Integer.parseInt(temp[6]));
+
+						dados.add(registro);
+						
+					} else {
+				
+						firstLine = false;
+						
+					}
+
+				} else {
+					
+					flag = false;
+					
+				}
+			}
+			
+			leitor.close();
+			
+			return dados;
+
+		} catch (FileNotFoundException e) {
+			
+			System.out.println();
+			System.out.println("--------------------------------------------");
+			System.out.println("Arquivo entrada.txt não encontrado :( , Crie-o ande de executar essa operação :) ");
+	        System.out.println("--------------------------------------------");
+	        
+			return null;
+			
+		} catch (IOException e) {
+			
+			System.out.println();
+			System.out.println("--------------------------------------------");
+			System.out.println("Arquivo entrada.txt não encontrado :( , Crie-o ande de executar essa operação :) ");
+	        System.out.println("--------------------------------------------");
+	        
+			return null;
+		}
+	}
+	
+	// -------------------------------------------------------------------------------------------
+	
+	public static boolean sortByQuickSort(String path) {
+		
+		List<Registro> listaRegistros = CRUD.fileToList(path);
+		
+		System.out.println(listaRegistros);
+		
+		return false;
 	}
 	
 }
