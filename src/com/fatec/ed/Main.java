@@ -120,8 +120,8 @@ public class Main {
         System.out.println("6) Classificação por Selection Sort");
         System.out.println("7) Classificação por Quick Sort");
         System.out.println("8) Pesquisar Dados");
-        System.out.println("9) Hash Linear das cidades");
-        System.out.println("10) Hash com lista ligada das cidades");
+        System.out.println("9) Hash Table das cidades");
+        System.out.println("10) Hash Table com lista ligada das cidades");
         System.out.println("11) Sair");
 
         System.out.println("");
