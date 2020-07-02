@@ -65,6 +65,7 @@ public class Main {
             		}
             		break;
             	case 6:
+            		CRUD.sortBySelectionSort("entrada.txt");
             	case 7:
             		CRUD.sortByQuickSort("entrada.txt");
             		break;

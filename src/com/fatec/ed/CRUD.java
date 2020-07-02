@@ -543,12 +543,76 @@ public class CRUD {
     
 	// -------------------------------------------------------------------------------------------
 	
-	public static boolean sortBySelectionSort(String path) {
+	public static void sortBySelectionSort(String path) {
 		
 		List<Registro> listaRegistros = CRUD.fileToList(path);
 		
-		System.out.println(listaRegistros);
+		if(listaRegistros == null) {
+			return;
+		}
 		
-		return false;
+		Registro[] registroArr = new Registro[listaRegistros.size()];
+		
+		for (Registro registro : listaRegistros) 
+			registroArr[listaRegistros.indexOf(registro)] = registro;
+		
+		
+        long tempoInicial = System.currentTimeMillis();
+        
+
+		try {
+			
+			selectionSort(registroArr);
+
+			BufferedWriter escritor = new BufferedWriter(new FileWriter("selectionSort.txt"));
+			
+			escritor.append("ID;Estados;Prod. Lixo a.a. (milhoes ton.);Postos de Coleta;% de Reciclagem;Economia em R$ (milhoes);Qtde de empregos gerados");
+
+			for (int i = 0; i < registroArr.length; i++) {
+				
+				escritor.append(registroArr[i].toString() + "\r\n");
+				
+			}
+			
+			escritor.flush();
+			escritor.close();
+			
+		} catch (IOException e) {
+			
+	        System.out.println("Ordenação por selection sort falhou :( ");
+
+			e.printStackTrace();
+			
+			return;
+		}
+		
+        System.out.println("");
+
+        System.out.println("Ordenação executada com sucesso :)");
+        
+        System.out.println("");
+
+		long tempoFinal = System.currentTimeMillis();
+		  
+        System.out.println("Executado em = " + (tempoFinal - tempoInicial) + " ms");
 	}
+	
+		
+	public static void selectionSort(Registro v[]) {
+		int length = v.length;
+	    for (int i = 0; i < length - 1; i++) {
+	      int minPos = i;
+	      Registro min = v[minPos];
+	      for (int j = i + 1; j < length; j++) {
+	        if (v[j].compareTo(min) < 0) {
+	          minPos = j;
+	          min = v[minPos];
+	        }
+	      }
+	      if (minPos != i) {
+	        v[minPos] = v[i];
+	        v[i] = min;
+	      }
+	    }
+	  }
 }
