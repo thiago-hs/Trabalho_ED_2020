@@ -101,13 +101,13 @@ public class CRUD {
 		} catch (FileNotFoundException e) {
 			System.out.println();
 			System.out.println("--------------------------------------------");
-			System.out.println("Arquivo entrada.txt não encontrado :( , Crie-o ande de executar essa operação :) ");
+			System.out.println("Arquivo entrada.txt nÃ£o encontrado :( , Crie-o ande de executar essa operaÃ§Ã£o :) ");
 	        System.out.println("--------------------------------------------");
 			return false;
 		} catch (IOException e) {
 			System.out.println();
 			System.out.println("--------------------------------------------");
-			System.out.println("Arquivo entrada.txt não encontrado :( , Crie-o ande de executar essa operação :) ");
+			System.out.println("Arquivo entrada.txt nÃ£o encontrado :( , Crie-o ande de executar essa operaÃ§Ã£o :) ");
 	        System.out.println("--------------------------------------------");
 			return false;
 		}
@@ -204,7 +204,7 @@ public class CRUD {
 				
 				if ((linha != null)) {
 					if (linhaAtual == 1) {
-						// pula esta linha e não adiciona
+						// pula esta linha e nÃ£o adiciona
 					} else {
 						dados.add(linha);
 					}
@@ -218,7 +218,7 @@ public class CRUD {
 		} catch (FileNotFoundException e) {
 			System.out.println();
 			System.out.println("--------------------------------------------");
-			System.out.println("Arquivo entrada.txt não encontrado :( , Crie-o ande de executar essa operação :) ");
+			System.out.println("Arquivo entrada.txt nÃ£o encontrado :( , Crie-o ande de executar essa operaÃ§Ã£o :) ");
 	        System.out.println("--------------------------------------------");
 			return false;
 		} catch (IOException e) {
@@ -296,7 +296,7 @@ public class CRUD {
 			} catch (FileNotFoundException e) {
 				System.out.println();
 				System.out.println("--------------------------------------------");
-				System.out.println("Arquivo entrada.txt não encontrado :( , Crie-o ande de executar essa operação :) ");
+				System.out.println("Arquivo entrada.txt nÃ£o encontrado :( , Crie-o ande de executar essa operaÃ§Ã£o :) ");
 		        System.out.println("--------------------------------------------");
 				return false;
 			} catch (IOException e) {
@@ -364,7 +364,7 @@ public class CRUD {
 			} catch (FileNotFoundException e) {
 				System.out.println();
 				System.out.println("--------------------------------------------");
-				System.out.println("Arquivo entrada.txt não encontrado :( , Crie-o ande de executar essa operação :) ");
+				System.out.println("Arquivo entrada.txt nÃ£o encontrado :( , Crie-o ande de executar essa operaÃ§Ã£o :) ");
 		        System.out.println("--------------------------------------------");
 				return 0;
 			} catch (IOException e) {
@@ -438,7 +438,7 @@ public class CRUD {
 			
 			System.out.println();
 			System.out.println("--------------------------------------------");
-			System.out.println("Arquivo entrada.txt não encontrado :( , Crie-o ande de executar essa operação :) ");
+			System.out.println("Arquivo entrada.txt nÃ£o encontrado :( , Crie-o ande de executar essa operaÃ§Ã£o :) ");
 	        System.out.println("--------------------------------------------");
 	        
 			return null;
@@ -447,7 +447,7 @@ public class CRUD {
 			
 			System.out.println();
 			System.out.println("--------------------------------------------");
-			System.out.println("Arquivo entrada.txt não encontrado :( , Crie-o ande de executar essa operação :) ");
+			System.out.println("Arquivo entrada.txt nÃ£o encontrado :( , Crie-o ande de executar essa operaÃ§Ã£o :) ");
 	        System.out.println("--------------------------------------------");
 	        
 			return null;
@@ -491,7 +491,7 @@ public class CRUD {
 			
 		} catch (IOException e) {
 			
-	        System.out.println("Ordena��o por quick sort falhou :( ");
+	        System.out.println("Ordenação por quick sort falhou :( ");
 
 			e.printStackTrace();
 			
@@ -500,7 +500,7 @@ public class CRUD {
 		
         System.out.println("");
 
-        System.out.println("Ordena��o executada com sucesso :)");
+        System.out.println("Ordenação executada com sucesso :)");
         
         System.out.println("");
 
@@ -578,7 +578,7 @@ public class CRUD {
 			
 		} catch (IOException e) {
 			
-	        System.out.println("Ordena��o por selection sort falhou :( ");
+	        System.out.println("Ordenação por selection sort falhou :( ");
 
 			e.printStackTrace();
 			
@@ -587,7 +587,7 @@ public class CRUD {
 		
         System.out.println("");
 
-        System.out.println("Ordena��o executada com sucesso :)");
+        System.out.println("Ordenação executada com sucesso :)");
         
         System.out.println("");
 
@@ -614,4 +614,31 @@ public class CRUD {
 	      }
 	    }
 	  }
+	public static String pesquisa(Registro r, String path) {
+		
+		if (r != null) {
+			int affectedRecords = 0;
+
+			try {
+				// leitura dos registros para criacao da 'LinkedList'
+				BufferedReader leitor = new BufferedReader(new FileReader(path));
+				List<String> dados = new LinkedList<String>();
+				boolean flag = true;
+
+					while (flag) {
+						String linha = leitor.readLine();
+					if ((linha != null)) {
+						dados.add(linha);
+					} else {
+						flag = false;
+					}
+					return linha;
+					}
+				}catch(IOException e) {
+					
+				}
+			}
+		return null;
+		}
+	}
 }
