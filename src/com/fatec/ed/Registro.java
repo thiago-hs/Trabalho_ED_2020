@@ -1,6 +1,6 @@
 package com.fatec.ed;
 
-public class Registro {
+public class Registro implements Comparable<Registro>{
 
 	/**
 	 	ID
@@ -80,11 +80,19 @@ public class Registro {
 
 	@Override
 	public String toString() {
-		return "Registro [id=" + id + ", uf=" + uf + ", prodLixo=" + prodLixo + ", postosColeta=" + postosColeta
-				+ ", porcentagemReciclagem=" + porcentagemReciclagem + ", economiaEmValores=" + economiaEmValores
-				+ ", qtdeEmpregosGerados=" + qtdeEmpregosGerados + "]";
+		return this.getId() + ";" +
+				this.getUf() + ";" +
+				this.getProdLixo() + ";" +
+				this.getPostosColeta() + ";" +
+				this.getPorcentagemReciclagem() + ";" +
+				this.getEconomiaEmValores() + ";" +
+				this.getQtdeEmpregosGerados();
 	}
-	
-	
+
+	@Override
+	public int compareTo(Registro arg) {
+		// TODO Auto-generated method stub
+		return this.getUf().compareTo(arg.getUf());
+	}
 	
 }

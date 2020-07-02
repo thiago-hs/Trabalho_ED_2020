@@ -12,6 +12,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 
 public class CRUD {
 
@@ -56,6 +57,7 @@ public class CRUD {
 			for (int i = 0; i < dados.size(); i++) {
 				escritor.append(dados.get(i) + "\r\n");
 			}
+			
 			escritor.flush();
 			escritor.close();
 		} catch (IOException e) {
@@ -454,7 +456,94 @@ public class CRUD {
 	
 	// -------------------------------------------------------------------------------------------
 	
-	public static boolean sortByQuickSort(String path) {
+	public static void sortByQuickSort(String path) {
+		
+		List<Registro> listaRegistros = CRUD.fileToList(path);
+		
+		if(listaRegistros == null) {
+			return;
+		}
+		
+		Registro[] registroArr = new Registro[listaRegistros.size()];
+		
+		for (Registro registro : listaRegistros) 
+			registroArr[listaRegistros.indexOf(registro)] = registro;
+		
+		
+        long tempoInicial = System.currentTimeMillis();
+        
+
+		try {
+			
+			quickSort(registroArr, 0, registroArr.length - 1);
+
+			BufferedWriter escritor = new BufferedWriter(new FileWriter("quickSort.txt"));
+			
+			escritor.append("ID;Estados;Prod. Lixo a.a. (milhoes ton.);Postos de Coleta;% de Reciclagem;Economia em R$ (milhoes);Qtde de empregos gerados");
+
+			for (int i = 0; i < registroArr.length; i++) {
+				
+				escritor.append(registroArr[i].toString() + "\r\n");
+				
+			}
+			
+			escritor.flush();
+			escritor.close();
+			
+		} catch (IOException e) {
+			
+	        System.out.println("Ordenação por quick sort falhou :( ");
+
+			e.printStackTrace();
+			
+			return;
+		}
+		
+        System.out.println("");
+
+        System.out.println("Ordenação executada com sucesso :)");
+        
+        System.out.println("");
+
+		long tempoFinal = System.currentTimeMillis();
+		  
+        System.out.println("Executado em = " + (tempoFinal - tempoInicial) + " ms");
+
+    }
+	
+	public static void quickSort(Registro v[], int esquerda, int direita) {
+		int esq = esquerda;
+		int dir = direita;
+		Registro pivo = v[(esq + dir) / 2];
+		Registro troca;
+
+		while (esq <= dir) {
+			while (v[esq].compareTo(pivo) < 0) {
+				esq = esq + 1;
+			}
+			while (v[dir].compareTo(pivo) > 0) {
+				dir = dir - 1;
+			}
+			if (esq <= dir) {
+				troca = v[esq];
+				v[esq] = v[dir];
+				v[dir] = troca;
+				esq = esq + 1;
+				dir = dir - 1;
+			}
+		}
+		if (dir > esquerda)
+			quickSort(v, esquerda, dir);
+
+		if (esq < direita)
+			quickSort(v, esq, direita);
+
+	}
+
+    
+	// -------------------------------------------------------------------------------------------
+	
+	public static boolean sortBySelectionSort(String path) {
 		
 		List<Registro> listaRegistros = CRUD.fileToList(path);
 		
@@ -462,5 +551,4 @@ public class CRUD {
 		
 		return false;
 	}
-	
 }

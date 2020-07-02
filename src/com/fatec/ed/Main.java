@@ -14,9 +14,7 @@ public class Main {
         System.out.println("<Explicação do trabalho>");
         System.out.println("--------------------------------------------");
         
-        while (true) {
-        	
-        	System.out.flush();  
+        while (true) { 
         	
         	Main.printarMenu();
         	
@@ -69,6 +67,7 @@ public class Main {
             	case 6:
             	case 7:
             		CRUD.sortByQuickSort("entrada.txt");
+            		break;
             	case 8:
             	case 9:
             	case 10:
