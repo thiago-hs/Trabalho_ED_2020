@@ -1,4 +1,4 @@
-# Projeto de Estrutura de dados
+# Projeto de Estrutura de Dados
 
 Esse projeto visa a criação de um sistema simples para aplicação de conceitos de Estrutura de dados.
 
@@ -33,4 +33,6 @@ Número da opção | Título | Descrição
 **8** | **Pesquisar Dados** | Baseado num input do usuário o sistema irá pesquisar por esse valor no conteúdo de 'entrada.txt', mais especificamente na coluna 'Estado', e retornar as linhas que corresponderam à pesquisa
 **9** | **Hash Table das cidades** | Baseado em um aquivo chamado 'cidades.txt' o sistema irá montar uma tabela de espalhamento para armazenar esses valores 
 **10** | **Hash Table com lista ligada das cidades** | Baseado em um aquivo chamado 'cidades.txt' o sistema irá montar uma tabela de espalhamento, utilizando listas ligadas como mecanismo de resolução de conflitos,  para armazenar esses valores 
+**11** | **Sair** | Finaliza a execução do sistema
 
+> Nenhuma opção (de 2 a 8) poderá ser executada sem a execução do item 1 (Create), que cria de fato o arquivo (entrada.txt) que as demais opções irão manipular. 
