@@ -16,6 +16,10 @@ public class Main {
         
         while (true) { 
         	
+            
+            Cidades operacoesCidade = new Cidades("cidades.txt");
+            operacoesCidade.hashLinear = operacoesCidade.iniciarHashLinear();
+            
         	Main.printarMenu();
         	
             String inputText = in.nextLine().trim();
@@ -27,6 +31,7 @@ public class Main {
         		Main.printarComDestaque("Entrada invalida!");
                 continue;
             }
+
             
             switch(inputEntry) {
             	case 1:
@@ -71,7 +76,12 @@ public class Main {
             		break;
             	case 8:
             	case 9:
+            		operacoesCidade.imprimirHashLinear();
+            		break;
             	case 10:
+            		
+            		break;
+            	case 11:
             		Main.printarComDestaque("Fim do programa!");
             		in.close();
                		return;
@@ -80,7 +90,6 @@ public class Main {
                     break;
             }
         }
-        
 	}
 	
 	// -------------------------------------------------------------------------------------------
@@ -99,9 +108,10 @@ public class Main {
         System.out.println("5) Update");
         System.out.println("6) Classificação por Selection Sort");
         System.out.println("7) Classificação por Quick Sort");
-        System.out.println("8) Pesquisa");
-        System.out.println("9) Hash das cidades");
-        System.out.println("10) Sair");
+        System.out.println("8) Pesquisar Dados");
+        System.out.println("9) Hash Linear das cidades");
+        System.out.println("10) Hash com lista ligada das cidades");
+        System.out.println("11) Sair");
 
         System.out.println("");
 	}

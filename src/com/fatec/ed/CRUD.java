@@ -472,7 +472,6 @@ public class CRUD {
 		
         long tempoInicial = System.currentTimeMillis();
         
-
 		try {
 			
 			quickSort(registroArr, 0, registroArr.length - 1);
