@@ -4,8 +4,12 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Comparator;
 
 public class Cidades {
 
@@ -40,6 +44,8 @@ public class Cidades {
 			}
 			
 			leitor.close();
+			
+			Collections.sort(dados, Collator.getInstance());
 			
 			return dados;
 			
