@@ -19,6 +19,7 @@ public class Main {
             
             Cidades operacoesCidade = new Cidades("cidades.txt");
             operacoesCidade.hashLinear = operacoesCidade.iniciarHashLinear();
+            operacoesCidade.hashLinkedList = operacoesCidade.iniciarHashLinkedList();
             
         	Main.printarMenu();
         	
@@ -79,7 +80,7 @@ public class Main {
             		operacoesCidade.imprimirHashLinear();
             		break;
             	case 10:
-            		
+            		operacoesCidade.imprimirHashLinkedList();
             		break;
             	case 11:
             		Main.printarComDestaque("Fim do programa!");

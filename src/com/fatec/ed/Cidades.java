@@ -11,7 +11,8 @@ public class Cidades {
 
 	public List<String> listaCidades = null;
 	public HashLinear hashLinear = null;
-	
+	public HashLinkedList hashLinkedList = null;
+
 	public Cidades(String path) {
 		super();
 		this.listaCidades = this.carregaCidades(path);
@@ -75,13 +76,42 @@ public class Cidades {
 		
 		return tabelaHash;
 	}
-	
+
 	public void imprimirHashLinear() {
 		
 		if(this.hashLinear == null) {
 			System.out.print("Hash Linar n„o inicializado :(");
 		}else {
 			this.hashLinear.imprime();
+		}
+	
+	}
+	
+	public HashLinkedList iniciarHashLinkedList() {
+		
+		if(this.listaCidades == null) {
+			System.out.println();
+			System.out.println("--------------------------------------------");
+			System.out.println("Dados do Arquivo n√£o encontrado :( , Crie-o ande de executar essa opera√ß√£o :) ");
+	        System.out.println("--------------------------------------------");
+			return null;
+		}
+		
+		HashLinkedList tabelaHash = new HashLinkedList(this.listaCidades.size());
+		
+		for(String cidade: this.listaCidades) {
+			tabelaHash.put(cidade);
+		}
+		
+		return tabelaHash;
+	}
+	
+	public void imprimirHashLinkedList() {
+		
+		if(this.hashLinkedList == null) {
+			System.out.print("Hash n„o inicializado :(");
+		}else {
+			this.hashLinkedList.printHashTable();
 		}
 	
 	}
