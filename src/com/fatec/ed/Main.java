@@ -11,7 +11,14 @@ public class Main {
 
 		System.out.println("--------------------------------------------");
         System.out.println("Trabalho de estrutura de dados - 2020");
-        System.out.println("<Explicação do trabalho>");
+		System.out.println("--------------------------------------------");
+        System.out.println("* Integrantes do grupo:");
+        System.out.println("- Daniel Lopes da Costa");
+        System.out.println("- Flávio Ribeiro de Barros da Silva");
+        System.out.println("- Jaide Alonso Ambrosio");
+        System.out.println("- Thiago Henrique da Silva");
+        System.out.println("- Vitor Martinelli Lobo ");
+        
         System.out.println("--------------------------------------------");
         
         while (true) { 
@@ -72,10 +79,13 @@ public class Main {
             		break;
             	case 6:
             		CRUD.sortBySelectionSort("entrada.txt");
+            		break;
             	case 7:
             		CRUD.sortByQuickSort("entrada.txt");
             		break;
             	case 8:
+            		CRUD.pesquisa("entrada.txt");
+            		break;
             	case 9:
             		operacoesCidade.imprimirHashLinear();
             		break;
@@ -83,7 +93,7 @@ public class Main {
             		operacoesCidade.imprimirHashLinkedList();
             		break;
             	case 11:
-            		Main.printarComDestaque("Fim do programa!");
+            		Main.printarComDestaque("Fim do programa ! Obrigado por me executar :)");
             		in.close();
                		return;
                	default:
@@ -151,31 +161,31 @@ public class Main {
         
         try {
         	
-            System.out.print("Digite o ID: ");
+            System.out.print("Digite o ID [int]: ");
             String inputText = in.nextLine().trim();
             r.setId(Integer.parseInt(inputText));
             
-            System.out.print("Digite o Estado: ");
+            System.out.print("Digite o Estado [String]: ");
             inputText = in.nextLine().trim();
             r.setUf(inputText);
     		
-            System.out.print("Digite a Producao de Lixo a/a (em milhoes ton): ");
+            System.out.print("Digite a Producao de Lixo a/a (em milhoes ton) [float]: ");
             inputText = in.nextLine().trim();
             r.setProdLixo(Float.parseFloat(inputText));
     		
-            System.out.print("Digite a qtde. de Postos de Coleta: ");
+            System.out.print("Digite a qtde. de Postos de Coleta [int]: ");
             inputText = in.nextLine().trim();
             r.setPostosColeta(Integer.parseInt(inputText));
             
-            System.out.print("Digite a porcetagem de Reciclagem: ");
+            System.out.print("Digite a porcetagem de Reciclagem [float]: ");
             inputText = in.nextLine().trim();
             r.setPorcentagemReciclagem(Float.parseFloat(inputText));
             
-            System.out.print("Digite a economia gerada em R$ (milhoes): ");
+            System.out.print("Digite a economia gerada em R$ (milhoes) [float]: ");
             inputText = in.nextLine().trim();
             r.setEconomiaEmValores(Float.parseFloat(inputText));
             
-            System.out.print("Digite a qtde. de Empregos Gerados: ");
+            System.out.print("Digite a qtde. de Empregos Gerados [int]: ");
             inputText = in.nextLine().trim();
             r.setQtdeEmpregosGerados(Integer.parseInt(inputText));
             

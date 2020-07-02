@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class CRUD {
 
@@ -76,6 +77,7 @@ public class CRUD {
 	// -------------------------------------------------------------------------------------------
 	
 	public static boolean read(String path) {
+		
 		List<String[]> dados = new ArrayList<String[]>();
 		
 		// Leitura do arquivo
@@ -614,4 +616,116 @@ public class CRUD {
 	      }
 	    }
 	  }
+	
+	public static void pesquisa(String path) {
+		
+		List<Registro> listaRegistros = CRUD.fileToList(path);
+		
+		if(listaRegistros == null) {
+			return;
+		}
+		
+		Scanner in = new Scanner(System.in);
+		
+        System.out.println("Digite o termo de busca: ");
+
+        String inputText = in.nextLine().trim();
+
+        listaRegistros = listaRegistros.stream().filter(p -> p.getUf().toLowerCase().contains(inputText.toLowerCase())).collect(Collectors.toList());
+        
+        if(listaRegistros.size() > 0) {
+        	// Aprsentação dos dados
+            String header = "ID;Estados;Prod. Lixo a.a. (milhoes ton.);Postos de Coleta;% de Reciclagem;Economia em R$ (milhoes);Qtde de empregos gerados";
+            
+            List<String[]> dados = new ArrayList<String[]>();
+            dados.add(header.split(";"));
+            
+            for(Registro regisro: listaRegistros) {
+            	
+            	String linha = regisro.getId() + ";" + regisro.getUf() + ";" + regisro.getProdLixo() + ";" + regisro.getPostosColeta() + ";" + regisro.getPostosColeta() + ";" + regisro.getEconomiaEmValores() + ";" + regisro.getQtdeEmpregosGerados();
+                
+            	dados.add(linha.split(";"));
+
+            }
+            
+            String[] temp = dados.get(0);
+    		int[] iArray = new int[temp.length];
+    		
+    		for (int i = 0; i < dados.size(); i++) {
+    			
+    			temp = dados.get(i);
+    			
+    			for (int j = 0; j < temp.length; j++) {
+    				if (iArray[j] < temp[j].length()) {
+    					iArray[j] = temp[j].length() + 3;
+    				}
+    			}
+    		}
+    		
+    		// imprime o cabecalho	
+    		temp = dados.get(0);
+    		int lenCab = 0;
+    		
+    		for (int b = 0; b < temp.length; b++) {
+    			if (temp[b].length() < (iArray[b])) {
+    				int tam = iArray[b] - temp[b].length(); 
+    				lenCab += temp[b].length() + 3;
+    				String s = temp[b];
+    				int t = 0;
+    				
+    				while (t < tam) {
+    					s += " ";
+    					t++;
+    				}
+    				
+    				s += " | ";
+    				System.out.print(s);
+    			} else {
+    				System.out.print(temp[b] + " | ");
+    				lenCab += temp[b].length() + 3;
+    			}
+    		}
+    		
+    		String linhaCabecalho = "";
+    		for (int k = 0; k < (lenCab * 1.30); k++) {
+    			linhaCabecalho += "-";
+    		}
+    		
+    		System.out.println();
+    		System.out.println(linhaCabecalho);
+    		
+    		// imprime os dados de acordo com o tamanho de cada titulo do cabecalho
+    		// contador comeca com 1 pra pular o cabecalho
+    		for (int a = 1; a < dados.size(); a++) {
+    			temp = dados.get(a);
+    			
+    			for (int b = 0; b < temp.length; b++) {
+    				if (temp[b].length() < (iArray[b])) {
+    					int tam = iArray[b] - temp[b].length(); 
+    					String s = temp[b];
+    					int t = 0;
+    					
+    					while (t < tam) {
+    						s += " ";
+    						t++;
+    					}
+    					
+    					s += " | ";
+    					System.out.print(s);
+    				} else {
+    					System.out.print(temp[b]);
+    				}
+    			}
+    			System.out.println();
+    		}
+        }else {
+    
+			System.out.println();
+			System.out.println("--------------------------------------------");
+	        System.out.println("Nenhum registro encontrado :( ");
+	        System.out.println("--------------------------------------------");
+        	
+        }
+    
+	}
 }
