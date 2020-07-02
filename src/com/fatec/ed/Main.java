@@ -11,7 +11,7 @@ public class Main {
 
 		System.out.println("--------------------------------------------");
         System.out.println("Trabalho de estrutura de dados - 2020");
-        System.out.println("<Explicação do trabalho>");
+        System.out.println("<ExplicaÃ§Ã£o do trabalho>");
         System.out.println("--------------------------------------------");
         
         while (true) { 
@@ -76,6 +76,7 @@ public class Main {
             		CRUD.sortByQuickSort("entrada.txt");
             		break;
             	case 8:
+			if(CRUD.pesquisa(inserirAtualizar(PESQUISA),"entrada.txt") != null);
             	case 9:
             		operacoesCidade.imprimirHashLinear();
             		break;
@@ -98,7 +99,7 @@ public class Main {
 	public static void printarMenu() {
         System.out.println("");
 
-        System.out.println("Opções do sistema: ");
+        System.out.println("OpÃ§Ãµes do sistema: ");
         
         System.out.println("");
 
@@ -107,8 +108,8 @@ public class Main {
         System.out.println("3) Delete");
         System.out.println("4) Insert");
         System.out.println("5) Update");
-        System.out.println("6) Classificação por Selection Sort");
-        System.out.println("7) Classificação por Quick Sort");
+        System.out.println("6) ClassificaÃ§Ã£o por Selection Sort");
+        System.out.println("7) ClassificaÃ§Ã£o por Quick Sort");
         System.out.println("8) Pesquisar Dados");
         System.out.println("9) Hash Linear das cidades");
         System.out.println("10) Hash com lista ligada das cidades");
@@ -131,6 +132,8 @@ public class Main {
 	
 	private static final int INSERT = 1;
 	private static final int UPDATE = 2;
+	private static final int PESQUISA = 3;
+	
 	
 	private static Registro inserirAtualizar(int tipo) {
 		@SuppressWarnings("resource")
@@ -143,49 +146,59 @@ public class Main {
 			System.out.println("Novo registro:");
 		} else if (tipo == UPDATE) {
 			System.out.println("Atualizacao de registro:");
+		} else if (tipo == PESQUISA) {
+			System.out.println("Pesquisa de registro");
 		}
 		
         System.out.println("---------------------");
 		
         Registro  r = new Registro();
         
-        try {
-        	
-            System.out.print("Digite o ID: ");
-            String inputText = in.nextLine().trim();
-            r.setId(Integer.parseInt(inputText));
-            
-            System.out.print("Digite o Estado: ");
-            inputText = in.nextLine().trim();
-            r.setUf(inputText);
-    		
-            System.out.print("Digite a Producao de Lixo a/a (em milhoes ton): ");
-            inputText = in.nextLine().trim();
-            r.setProdLixo(Float.parseFloat(inputText));
-    		
-            System.out.print("Digite a qtde. de Postos de Coleta: ");
-            inputText = in.nextLine().trim();
-            r.setPostosColeta(Integer.parseInt(inputText));
-            
-            System.out.print("Digite a porcetagem de Reciclagem: ");
-            inputText = in.nextLine().trim();
-            r.setPorcentagemReciclagem(Float.parseFloat(inputText));
-            
-            System.out.print("Digite a economia gerada em R$ (milhoes): ");
-            inputText = in.nextLine().trim();
-            r.setEconomiaEmValores(Float.parseFloat(inputText));
-            
-            System.out.print("Digite a qtde. de Empregos Gerados: ");
-            inputText = in.nextLine().trim();
-            r.setQtdeEmpregosGerados(Integer.parseInt(inputText));
-            
-        }catch( Exception e) {
-        	
-        	System.out.println("Erro ao manipular registro :(");
-        	return null;
-        	
-        }
- 
-		return r;
+       if(tipo != PESQUISA) {
+        	 try {
+             	
+                 System.out.print("Digite o ID: ");
+                 String inputText = in.nextLine().trim();
+                 r.setId(Integer.parseInt(inputText));
+                 
+                 System.out.print("Digite o Estado: ");
+                 inputText = in.nextLine().trim();
+                 r.setUf(inputText);
+         		
+                 System.out.print("Digite a Producao de Lixo a/a (em milhoes ton): ");
+                 inputText = in.nextLine().trim();
+                 r.setProdLixo(Float.parseFloat(inputText));
+         		
+                 System.out.print("Digite a qtde. de Postos de Coleta: ");
+                 inputText = in.nextLine().trim();
+                 r.setPostosColeta(Integer.parseInt(inputText));
+                 
+                 System.out.print("Digite a porcetagem de Reciclagem: ");
+                 inputText = in.nextLine().trim();
+                 r.setPorcentagemReciclagem(Float.parseFloat(inputText));
+                 
+                 System.out.print("Digite a economia gerada em R$ (milhoes): ");
+                 inputText = in.nextLine().trim();
+                 r.setEconomiaEmValores(Float.parseFloat(inputText));
+                 
+                 System.out.print("Digite a qtde. de Empregos Gerados: ");
+                 inputText = in.nextLine().trim();
+                 r.setQtdeEmpregosGerados(Integer.parseInt(inputText));
+                 
+             }catch( Exception e) {
+             	
+             	System.out.println("Erro ao manipular registro :(");
+             	return null;
+             	
+             }  
+        	 return r;
+     	
+        }    
+        System.out.print("Digite o Estado: ");
+        String inputText = in.nextLine().trim();
+        r.setUf(inputText);
+        return r;
 	}
+	
+    
 }
